@@ -29,7 +29,7 @@ function verifyJwt(req, res, next) {
 
 }
 
-const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env.USER_PASSWORD}@cluster1.helve.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://registration-auth:zeEsVPX37KQygVQZ@cluster1.helve.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
@@ -40,6 +40,7 @@ async function run() {
         //   jwt token acccess
         app.post('/user/:email', (req, res) => {
             const email = req.params.email;
+            console.log(req.body)
             const accessToken = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, {
                 expiresIn: '2d'
             })
